@@ -22,7 +22,7 @@
     <!-- Main content -->
     <section class="content">
         <div class="container-fluid">
-            <form action="{{ route('update', ['id'=>$data->id]) }}" method="POST">
+            <form action="{{ route('admin.update', ['id'=>$data->id]) }}" method="POST">
                 @csrf
                 @method('PUT')
                 <div class="row">

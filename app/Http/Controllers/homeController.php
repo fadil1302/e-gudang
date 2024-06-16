@@ -9,35 +9,11 @@ use Illuminate\Support\Facades\Validator;
 
 class homeController extends Controller
 {
-    public function dashboard(){
-        return view('dashboard');
+    public function landing(){
+        return view('landing');
     }
 
-    //login
-    public function login(){
-        return view('login');
-    }
-    public function dologin(Request $request){
-        dd($request->all());
-        // Lakukan validasi inputan dari form
-        $validasi = $request->validate([
-            'email' => 'required|email',
-            'password' => 'required',
-        ]);
 
-        // Coba untuk melakukan login
-        if (auth()->attempt($validasi)) {
-            // Jika berhasil, redirect ke halaman dashboard
-            return redirect()->route('index');
-        }
-
-        // Jika tidak berhasil, kembali ke halaman login dengan pesan error
-        return back()->withErrors([
-            'email' => 'Email tidak ada.',
-        ]);
-    }
-
-    //login
     public function index(){
         $data = User::get();
 
@@ -64,7 +40,7 @@ class homeController extends Controller
 
         User::create($data);
 
-        return redirect()->route('index');
+        return redirect()->route('admin.index');
     }
     //create
 
@@ -92,7 +68,7 @@ class homeController extends Controller
 
         User::whereId($id)->update($data);
 
-        return redirect()->route('index');
+        return redirect()->route('admin.index');
         }
         //edit
         
@@ -103,7 +79,7 @@ class homeController extends Controller
             if($data){
                 $data->delete();
                 }
-            return redirect()->route('index');
+            return redirect()->route('admin.index');
                 }
     //delete
 }

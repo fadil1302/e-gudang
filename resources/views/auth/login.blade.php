@@ -10,7 +10,7 @@
 <body>
     <nav class="navbar navbar-dark bg-primary">
         <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1"><a href="{{ route('dash') }}" class="btn btn-light">My Dashboard</a></span>
+            <span class="navbar-brand mb-0 h1"><a href="{{ route('landing') }}" class="btn btn-light">My LandingPage</a></span>
 
         </div>
     </nav>
@@ -21,14 +21,21 @@
                 <div class="card">
                     <div class="card-body">
                         <h3 class="card-title text-center">Login</h3>
-                        <form action="/user">
+                        <form action="{{ route('dologin') }}" method="POST">
+                            @csrf
                             <div class="mb-3">
                                 <label for="email" class="form-label">Email address</label>
-                                <input type="email" class="form-control"  id="email" aria-describedby="emailHelp" placeholder="Enter email">
-                            </div>
-                            <div class="mb-3">
-                                <label for="password" class="form-label">Password</label>
-                                <input type="password" class="form-control"  id="password" placeholder="Password">
+                                <input type="email" class="form-control" name="email"  id="email" aria-describedby="emailHelp" placeholder="Enter email">
+                                @error('email')
+                                    <small style="color: red">{{ $message }}</small>
+                                @enderror
+                                </div>
+                                <div class="mb-3">
+                                    <label for="password" class="form-label">Password</label>
+                                    <input type="password" class="form-control" name="password" id="password" placeholder="Password">
+                                    @error('email')
+                                        <small style="color: red">{{ $message }}</small>
+                                    @enderror
                             </div>
                             <div class="text-center">
                                 <button type="submit" class="btn btn-primary">Login</button>
